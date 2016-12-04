@@ -1,0 +1,119 @@
+---
+title: "Statistical Methods - Assignment 2"
+author: "Michel Mooiweer (1866761) Thomas Webbers (2560695) Eirik Kultorp (2544992)"
+date: "December 2016"
+output: pdf_document
+urlcolor: "blue"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(warn=-1)
+```
+
+## Exercise 3.3
+
+### a)
+
+```{r echo=F}
+load("Ass3.RData")
+res=t.test(Alice,Bob)
+pe = res[['estimate']][1]-res[['estimate']][2]
+print(paste('Point estimate : ',pe,'(Alice works',pe,'hours more than Bob)'))
+print(paste('Confidence interval (0.95) :',res[['conf.int']][1] , ':' , res[['conf.int']][2]))
+```
+
+### b)
+
+We do a t-test because we're testing for difference between population means. 
+The [conditions](http://stattrek.com/hypothesis-test/difference-in-means.aspx) are also met: 
+
+ - The sampling method for each sample is simple random sampling
+ - The samples are independent.
+ - Each population is at least 20 times larger than its respective sample. (We don't know this, but we assume it)
+ - The sampling distribution is approximately normal and the sample size is greater than 40, without outliers.
+
+```{r echo=F}
+res
+# the hypotheses in terms of the population parameter of interest;
+# the significance level;
+# the test statistic and its distribution under the null hypothesis;
+# the observed value of the test statistic (the observed score);
+# the P-value or the critical values;
+# whether or not the null hypothesis is rejected and why.
+# If applicable, also phrase your conclusion in terms of the context of the problem.
+```
+
+ - null hypothesis: true difference in means is equal to 0
+ - alternative hypothesis: true difference in means is not equal to 0
+ - significance level: 5%
+ - test statistic: difference in means
+ - observed value: 0.2024
+ - p-value: 0.1247 
+
+We fail to reject the null hypothesis because p>0.05. In other words, we can't disprove the manager's claim that Alice and Bob work the same amount of hours. We could also have reached the same conclusion just by looking at the confidence interval, which includes 0 (indicating a test statistic of 0 would not be unexpected with this significance level).
+
+### c)
+
+We do a t-test for the same reasons as above. This time we test the claim that Alice works less than Bob
+
+```{r echo=F}
+t.test(Alice,Bob,alternative = "greater") 
+```
+
+ - null hypothesis: true difference in means is less than or equal to 0 
+ - alternative hypothesis: true difference in means is greater than 0
+ - significance level: 5%
+ - test statistic: difference in means
+ - observed value: 0.2024
+ - p-value: 0.06235
+
+We fail to reject the null hypothesis because p>0.05. In other words, we can't confirm Alice's claim that she works more than Bob. We could also have reached the same conclusion just by looking at the confidence interval, which has `<0` on the left side (indicating a test statistic of `<0` would not be unexpected with this significance level). 
+
+### d)
+
+`0.1247/0.06235==2`
+
+Huh.
+
+## 3.4
+
+### a)
+
+```{r echo=F}
+(sum(Alice > 3.5)/length(Alice))-(sum(Bob > 3.5)/length(Bob))
+```
+
+### b)
+
+We perform a test for population proportions. 
+
+```{r echo=F}
+
+d <- matrix(c(sum(Alice>3.5),sum(Bob>3.5),length(Alice)-sum(Alice>3.5),length(Bob)-sum(Bob>3.5)),nrow=2)
+colnames(d) <- c("T","F")
+rownames(d) <- c("A","B")
+d <- as.table(d)
+d
+
+prop.test(d,alternative="greater")
+# the hypotheses in terms of the population parameter of interest;
+# the significance level;
+# the test statistic and its distribution under the null hypothesis;
+# the observed value of the test statistic (the observed score);
+# the P-value or the critical values;
+# whether or not the null hypothesis is rejected and why.
+# If applicable, also phrase your conclusion in terms of the context of the problem.
+```
+
+
+ - null hypothesis: true difference in proportions is less than or equal to 0 
+ - alternative hypothesis: true difference in proportions is greater than 0
+ - significance level: 5%
+ - test statistic: difference in means
+ - observed value: 0.16
+ - p-value: 0.0595
+ 
+We fail to reject the null hypothesis because p>0.05. In other words, we can't confirm Alice's claim claim that the proportion of evenings on which
+she worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours. We could also have reached the same conclusion just by looking at the confidence interval, which has `<0` on the left side (indicating a test statistic of `<0` would not be unexpected with this significance level). 
+
