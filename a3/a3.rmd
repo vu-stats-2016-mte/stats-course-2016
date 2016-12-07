@@ -29,7 +29,7 @@ $\hat{p} = 0.15$
 
 $1 - \hat{p} = \hat{q} = 0.85$
 
-Significance level
+Confidence level
 $\alpha = 0.05$
 
 $\alpha/2 = 0.025$
@@ -50,8 +50,28 @@ Sample size needed is 545
 
 
 ## 3.2 
+Claim males (12-16) correctly report their height:
 
-    // TODO
+- Population parameter: difference population means
+- $H_0 : \mu _1 = \mu _2$
+- $H_a : \mu _1 \neq \mu _2$
+-Significance level: $\alpha= 0.1$
+- Test statistic: \[T_d = \frac{\bar{D}-(\mu _1 -\mu _ 2)}{\frac{S_d}{\sqrt{n}}}\]
+  which has a t-distribution with n-1 degrees of freedom under the null hypothesis
+- Observed value: $\bar{d} = -1$
+
+ with$\mu _1 - \mu_ 2 = 0$
+
+ with $S_d = 3.520$
+
+ with n = 12
+
+\[t_d = \frac{-1-0}{\frac{3.520}{\sqrt{12}}}
+\]
+\[t_d = -0.984\]
+
+From Table 3-A
+Critical value (2-tailed $\alpha = 0.1$ ) = 1.796
 
 # R-Exercises
 
@@ -175,7 +195,7 @@ tte(c(-0.5, -0.2, 0.3, 1),c(10, 25, 50, 100),100)
 
 We repeat for many more values and visualize it, so as to see patterns more clearly
 
-```{r 3.5de, echo=F}
+```{r 3.5de, echo=F, eval=FALSE}
 
 means = seq(-0.5,0.5,0.0125)
 sample_sizes = rev(seq(5,500,5))
