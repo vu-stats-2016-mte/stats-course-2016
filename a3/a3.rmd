@@ -5,7 +5,18 @@ date: "December 2016"
 output: pdf_document
 urlcolor: "blue"
 ---
-# Exercise 3.1
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(warn=-1)
+```
+
+# Theoretical exercises
+
+## 3.1
 
 
 \begin{gather*}
@@ -37,19 +48,6 @@ n &= 544.226 \rightarrow 545
 
 Sample size needed is 545
 
-
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-options(warn=-1)
-```
-
-# Theoretical exercises
-
-## 3.1
-
-    // TODO
 
 ## 3.2 
 
