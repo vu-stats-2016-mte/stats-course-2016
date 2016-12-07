@@ -11,11 +11,44 @@ knitr::opts_chunk$set(echo = TRUE)
 options(warn=-1)
 ```
 
+# Theoretical exercises
+
+## 3.1
+
+    // TODO
+
+## 3.2 
+
+    // TODO
+
+# R-Exercises
+
+```{r printhypotest, echo=F}
+
+printhypotest <- function(res,test_statistic,null_hypothesis,claim){
+  
+  SIGNIFICANCE_LVL=0.05
+
+  mycat <- function(text){return(cat(gsub(pattern = "\n", replacement = "  \n", x = text)))}
+  
+  s=paste("#### Hypothesis test report\n\n - Null hypothesis:",null_hypothesis,
+        "\n - Alternative hypothesis:","NOT",null_hypothesis,
+        "\n - Significance level:",SIGNIFICANCE_LVL,
+        "\n - Test statistic:",test_statistic,
+        "\n - Observed value:",res$estimate[1]-res$estimate[2],
+        "\n - p-value:",res$p.value)
+  
+  a = "We could also have reached the same conclusion just by looking at the confidence interval, which "
+  fir <- if (res$p.value<0.05) paste0("\n\nWe fail to reject the null hypothesis because p>",SIGNIFICANCE_LVL,".","In other words, we can't reject the claim that ", claim, ". ") else paste0("\n\nWe reject the null hypothesis because p<=",SIGNIFICANCE_LVL,".","In other words, we can reject the claim that ", claim, ". ")
+  return(mycat(paste(s,fir,a)))
+}
+```
+
 ## Exercise 3.3
 
 ### a)
 
-```{r echo=F}
+```{r 3.3a, echo=F}
 load("Ass3.RData")
 res=t.test(Alice,Bob)
 pe = res[['estimate']][1]-res[['estimate']][2]
@@ -33,54 +66,32 @@ The [conditions](http://stattrek.com/hypothesis-test/difference-in-means.aspx) a
  - Each population is at least 20 times larger than its respective sample. (We don't know this, but we assume it)
  - The sampling distribution is approximately normal and the sample size is greater than 40, without outliers.
 
-```{r echo=F}
-res
-# the hypotheses in terms of the population parameter of interest;
-# the significance level;
-# the test statistic and its distribution under the null hypothesis;
-# the observed value of the test statistic (the observed score);
-# the P-value or the critical values;
-# whether or not the null hypothesis is rejected and why.
-# If applicable, also phrase your conclusion in terms of the context of the problem.
+```{r 3.3b, echo=F, results='asis'}
+printhypotest(res,"Difference in means","True difference in means is equal to 0","Alice and Bob work the same amount of hours")
 ```
-
- - null hypothesis: true difference in means is equal to 0
- - alternative hypothesis: true difference in means is not equal to 0
- - significance level: 5%
- - test statistic: difference in means
- - observed value: 0.2024
- - p-value: 0.1247 
-
-We fail to reject the null hypothesis because p>0.05. In other words, we can't disprove the manager's claim that Alice and Bob work the same amount of hours. We could also have reached the same conclusion just by looking at the confidence interval, which includes 0 (indicating a test statistic of 0 would not be unexpected with this significance level).
 
 ### c)
 
 We do a t-test for the same reasons as above. This time we test the claim that Alice works less than Bob
 
-```{r echo=F}
-t.test(Alice,Bob,alternative = "greater") 
+```{r 3.3c, echo=F, results='asis'}
+res=t.test(Alice,Bob,alternative = "greater") 
+printhypotest(res,"Difference in means","True difference in means is less than or equal to 0","Alice works more than Bob")
 ```
-
- - null hypothesis: true difference in means is less than or equal to 0 
- - alternative hypothesis: true difference in means is greater than 0
- - significance level: 5%
- - test statistic: difference in means
- - observed value: 0.2024
- - p-value: 0.06235
-
-We fail to reject the null hypothesis because p>0.05. In other words, we can't confirm Alice's claim that she works more than Bob. We could also have reached the same conclusion just by looking at the confidence interval, which has `<0` on the left side (indicating a test statistic of `<0` would not be unexpected with this significance level). 
 
 ### d)
 
-`0.1247/0.06235==2`
+`0.1247/0.06235 == 2`
 
-Huh.
+The p-values represent the probability of obtaining something at least as extreme as the observed value if the null hypothesis is true.
+We performed two tests on the same data, `u!=0` and `u>=0`, a one-tailed and two-tailed test. 
+Because the tails are of equal area, the two-tailed test has twice as much area outside the confidence interval. 
 
 ## 3.4
 
 ### a)
 
-```{r echo=F}
+```{r 3.4a, echo=F}
 (sum(Alice > 3.5)/length(Alice))-(sum(Bob > 3.5)/length(Bob))
 ```
 
@@ -88,32 +99,113 @@ Huh.
 
 We perform a test for population proportions. 
 
-```{r echo=F}
-
+```{r 3.4b, echo=F, results='asis'}
 d <- matrix(c(sum(Alice>3.5),sum(Bob>3.5),length(Alice)-sum(Alice>3.5),length(Bob)-sum(Bob>3.5)),nrow=2)
 colnames(d) <- c("T","F")
 rownames(d) <- c("A","B")
 d <- as.table(d)
-d
-
-prop.test(d,alternative="greater")
-# the hypotheses in terms of the population parameter of interest;
-# the significance level;
-# the test statistic and its distribution under the null hypothesis;
-# the observed value of the test statistic (the observed score);
-# the P-value or the critical values;
-# whether or not the null hypothesis is rejected and why.
-# If applicable, also phrase your conclusion in terms of the context of the problem.
+res = prop.test(d,alternative="greater")
+printhypotest(res,"Difference in proportions","True difference in proportions is less than or equal to 0 ","The proportion of evenings on which Alice worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours")
 ```
 
+## 3.5
 
- - null hypothesis: true difference in proportions is less than or equal to 0 
- - alternative hypothesis: true difference in proportions is greater than 0
- - significance level: 5%
- - test statistic: difference in means
- - observed value: 0.16
- - p-value: 0.0595
- 
-We fail to reject the null hypothesis because p>0.05. In other words, we can't confirm Alice's claim claim that the proportion of evenings on which
-she worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours. We could also have reached the same conclusion just by looking at the confidence interval, which has `<0` on the left side (indicating a test statistic of `<0` would not be unexpected with this significance level). 
+```{r tte, echo=F}
 
+tte <- function(means,sample_sizes,repetitions){
+  
+  m = c()
+  
+  for (mean in means){
+    for (sample_size in sample_sizes){
+      num_rejects = 0
+      for (i in seq(1,100)){
+        x = rnorm(sample_size,mean,1)
+        t = t.test(x)
+        if (t$p.value<=0.05) num_rejects=num_rejects+1
+      }
+      m[length(m)+1] = num_rejects/repetitions
+    }
+  }
+  
+  return(matrix(m,nrow=length(sample_sizes),ncol=length(means)))
+}
+
+```
+
+### a,b,c)
+
+```{r 3.5abc, echo=F}
+tte(c(-0.5, -0.2, 0.3, 1),c(10, 25, 50, 100),100)
+```
+
+### d,e)
+
+We repeat for many more values and visualize it, so as to see patterns more clearly
+
+```{r 3.5de, echo=F}
+
+means = seq(-0.5,0.5,0.0125)
+sample_sizes = rev(seq(5,500,5))
+
+r = tte(means, sample_sizes,100)
+
+library(plotrix)
+
+color2D.matplot(
+  r,
+  show.legend=TRUE,
+  xlab="Mean",
+  ylab="Sample size",
+  axes=FALSE,
+  border=NA
+)
+axis(1,at=1:length(means),labels=means)
+axis(2,at=length(sample_sizes):1,labels=sample_sizes)
+```
+
+In the above graphic, lighter cells indicate a higher proportions of rejected hypotheses. 
+Since we know that the null hypothesis really does hold, this translates into the proportion of type II errors (false negative). 
+It is difficult to see in the above graphic, but as the sample size increases the proportion should approach 0.95 for the samples of mean=0, because the significance level is 0.05. 
+
+# Appendix
+
+## printhypotest
+
+```{r eval=FALSE, ref.label="printhypotest"}
+```
+
+## 3.3.a
+
+```{r eval=FALSE, ref.label="3.3a"}
+```
+
+## 3.3.b
+
+```{r eval=FALSE, ref.label="3.3b"}
+```
+
+## 3.4.a
+
+```{r eval=FALSE, ref.label="3.4a"}
+```
+
+## 3.4.b
+
+```{r eval=FALSE, ref.label="3.4b"}
+```
+
+## tte
+
+```{r eval=FALSE, ref.label="tte"}
+```
+
+## 3.5.a,b,c
+
+```{r eval=FALSE, ref.label="3.5abc"}
+```
+
+## 3.5.d,e
+
+```{r eval=FALSE, ref.label="3.5de"}
+```
