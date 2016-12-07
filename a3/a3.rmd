@@ -1,10 +1,44 @@
 ---
-title: "Statistical Methods - Assignment 2"
+title: "Statistical Methods - Assignment 3"
 author: "Michel Mooiweer (1866761) Thomas Webbers (2560695) Eirik Kultorp (2544992)"
 date: "December 2016"
 output: pdf_document
 urlcolor: "blue"
 ---
+# Exercise 3.1
+
+
+\begin{gather*}
+n = \frac{[z_{\alpha/2}]^2\hat{p}\hat{q}}{E^2}
+\end{gather*}
+
+
+Sample Proportion
+$\hat{p} = 0.15$
+
+$1 - \hat{p} = \hat{q} = 0.85$
+
+Significance level
+$\alpha = 0.05$
+
+$\alpha/2 = 0.025$
+
+Critical value:
+$z_{\alpha/2} = 1.96$ 
+
+$E=0.03$
+
+\begin{equation*}
+\begin{split}
+n &= \frac{1.96^2\cdot 0.15 \cdot 0.85}{0.03^2}\\
+n &= 544.226 \rightarrow 545
+\end{split}
+\end{equation*}
+
+Sample size needed is 545
+
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
