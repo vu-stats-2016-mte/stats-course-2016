@@ -164,7 +164,7 @@ colnames(d) <- c("T","F")
 rownames(d) <- c("A","B")
 d <- as.table(d)
 res = prop.test(d,alternative="greater")
-printhypotest(res,"Difference in proportions","True difference in proportions is less than or equal to 0 ","The proportion of evenings on which Alice worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours")
+printhypotest(res,"$Z=\\dfrac{(\\hat{p}_1-\\hat{p}_2)-(p_1-p_2)}{\\sqrt{\\hat{p}(1-\\hat{p})\\left(\\dfrac{1}{n_1}+\\dfrac{1}{n_2}\\right)}}$","True difference in proportions is less than or equal to 0 ","The proportion of evenings on which Alice worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours")
 ```
 
 ## 3.5
