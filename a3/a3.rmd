@@ -91,8 +91,8 @@ printhypotest <- function(res,test_statistic,null_hypothesis,claim){
         "\n - Alternative hypothesis:","NOT",null_hypothesis,
         "\n - Significance level:",SIGNIFICANCE_LVL,
         "\n - Test statistic:",test_statistic,
-        "\n - Observed value:",res$estimate[1]-res$estimate[2],
-        "\n - p-value:",res$p.value)
+        "\n - Observed value:",round(res$estimate[1]-res$estimate[2],3),
+        "\n - p-value:",round(res$p.value,3))
   
   a = "We could also have reached the same conclusion just by looking at the confidence interval, which "
   fir <- if (res$p.value<0.05) paste0("\n\nWe fail to reject the null hypothesis because p>",SIGNIFICANCE_LVL,".","In other words, we can't reject the claim that ", claim, ". ") else paste0("\n\nWe reject the null hypothesis because p<=",SIGNIFICANCE_LVL,".","In other words, we can reject the claim that ", claim, ". ")
@@ -108,8 +108,9 @@ printhypotest <- function(res,test_statistic,null_hypothesis,claim){
 load("Ass3.RData")
 res=t.test(Alice,Bob)
 pe = res[['estimate']][1]-res[['estimate']][2]
+pe = round(pe,4)
 print(paste('Point estimate : ',pe,'(Alice works',pe,'hours more than Bob)'))
-print(paste('Confidence interval (0.95) :',res[['conf.int']][1] , ':' , res[['conf.int']][2]))
+print(paste('Confidence interval (0.95) :',round(res[['conf.int']][1],3) , ':' , round(res[['conf.int']][2],3)))
 ```
 
 ### b)
