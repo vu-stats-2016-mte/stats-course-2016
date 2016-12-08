@@ -73,6 +73,10 @@ Claim males (12-16) correctly report their height:
 From Table 3-A
 Critical value (2-tailed $\alpha = 0.1$ ) = 1.796
 
+-0.984 is between -1.796 and 1.796
+Thus, we can't reject the null hypotheses.
+Therefore, there is not enough evidence to say males(12-16) do not correctly report their height.
+
 # R-Exercises
 
 ```{r printhypotest, echo=F}
@@ -195,7 +199,7 @@ tte(c(-0.5, -0.2, 0.3, 1),c(10, 25, 50, 100),100)
 
 We repeat for many more values and visualize it, so as to see patterns more clearly
 
-```{r 3.5de, echo=F, eval=FALSE}
+```{r 3.5de, echo=F}
 
 means = seq(-0.5,0.5,0.0125)
 sample_sizes = rev(seq(5,500,5))
