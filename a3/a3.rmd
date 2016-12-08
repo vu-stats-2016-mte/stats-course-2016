@@ -164,7 +164,7 @@ colnames(d) <- c("T","F")
 rownames(d) <- c("A","B")
 d <- as.table(d)
 res = prop.test(d,alternative="greater")
-printhypotest(res,"$Teq = \\frac{((\\bar{x}_1-\\bar{x}_2)-(\\mu_1-\\mu_2))}{\\sqrt[2]{S_p^2/n_1 + S_p^2/n_2}}$ \n\n\t with $S_p^2 = \\frac{(n_1-1)*S_2^1+(n_2-1)*S_2^2}{n_1+n_2-2}$","True difference in proportions is less than or equal to 0 ","The proportion of evenings on which Alice worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours")
+printhypotest(res,"Difference in proportions","True difference in proportions is less than or equal to 0 ","The proportion of evenings on which Alice worked more than 3.5 hours is larger than the proportion of evenings on which Bob worked more than 3.5 hours")
 ```
 
 ## 3.5
@@ -202,7 +202,7 @@ tte(c(-0.5, -0.2, 0.3, 1),c(10, 25, 50, 100),100)
 
 We repeat for many more values and visualize it, so as to see patterns more clearly
 
-```{r 3.5de, echo=F, eval=FALSE}
+```{r 3.5de, echo=F}
 
 means = seq(-0.5,0.5,0.0125)
 sample_sizes = rev(seq(5,500,5))
