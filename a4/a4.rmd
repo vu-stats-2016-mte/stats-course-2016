@@ -61,8 +61,28 @@ investigate_linear_correlation(income,crimes,"income","crimes")
 
 ### c)
 
+    // todo figure how to interpret this output and the plots
+    // based on https://www.r-bloggers.com/simple-linear-regression-2/
 
 ```{r 4.3c, echo=F}
+lmres = lm(crimes ~ income)
+summary(lmres)
+library("lattice")
+xyplot(resid(lmres) ~ fitted(lmres),
+  xlab = "Fitted Values",
+  ylab = "Residuals",
+  main = "Residual Diagnostic Plot",
+  panel = function(x, y, ...)
+  {
+    panel.grid(h = -1, v = -1)
+    panel.abline(h = 0)
+    panel.xyplot(x, y, ...)
+  }
+)
+qqmath( ~ resid(lmres),
+  xlab = "Theoretical Quantiles",
+  ylab = "Residuals"
+)
 ```
 
 ### d)
