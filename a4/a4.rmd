@@ -28,11 +28,35 @@ options(warn=-1)
 ### a)
 
 ```{r 4.3a, echo=F}
+dat=matrix(as.numeric(as.matrix(read.table("crimemale.txt"))[2:19,]),ncol=3)
+age=dat[,1]
+income=dat[,2]
+crimes=dat[,3]
+
+investigate_linear_correlation <- function(v1,v2,xlab,ylab){
+  print(v1)
+  print(v2)
+  plot(v1,v2,xlab=xlab,ylab=ylab)
+  corr=cor(v1,v2)
+  print(paste("Correlation: (",xlab,",",ylab,")",corr))
+  corr=abs(corr)
+  
+  # TODO adjust these thresholds based on statistical standards (if they exist) 
+  
+  if (corr<0.7) w ="unlikely"
+  else if (corr<0.8) w = "plausible"
+  else w="likely"
+  print(paste("Linear correlation seems",w))
+}
+
+investigate_linear_correlation(age,crimes,"age","crimes")
+
 ```
 
 ### b)
 
 ```{r 4.3b, echo=F}
+investigate_linear_correlation(income,crimes,"income","crimes")
 ```
 
 ### c)
