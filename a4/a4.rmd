@@ -1,0 +1,134 @@
+---
+title: "Statistical Methods - Assignment 3"
+author: "Michel Mooiweer (1866761) Thomas Webbers (2560695) Eirik Kultorp (2544992)"
+date: "December 2016"
+output: pdf_document
+urlcolor: "blue"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(warn=-1)
+```
+
+# Theoretical exercises
+
+## 4.1
+
+    // todo
+
+## 4.2 
+
+    // todo
+
+# R-Exercises
+
+## 4.3
+
+### a)
+
+```{r 4.3a, echo=F}
+```
+
+### b)
+
+```{r 4.3b, echo=F}
+```
+
+### c)
+
+
+```{r 4.3c, echo=F}
+```
+
+### d)
+
+```{r 4.3d, echo=F}
+```
+
+### e)
+
+```{r 4.3e, echo=F}
+```
+
+## 4.4
+
+### a)
+
+```{r 4.4a, echo=F}
+```
+
+### b)
+
+```{r 4.4b, echo=F}
+```
+
+## 4.5
+
+### a)
+
+```{r 4.5a, echo=F}
+```
+
+### b)
+
+```{r 4.5b, echo=F}
+```
+
+
+### c)
+
+```{r 4.5c, echo=F}
+```
+
+# Appendix
+
+## 4.3.a
+
+```{r eval=FALSE, ref.label="4.3a"}
+```
+
+## 4.3.b
+
+```{r eval=FALSE, ref.label="4.3b"}
+```
+
+## 4.3.c
+
+```{r eval=FALSE, ref.label="4.3c"}
+```
+
+## 4.3.d
+
+```{r eval=FALSE, ref.label="4.3d"}
+```
+
+## 4.3.e
+
+```{r eval=FALSE, ref.label="4.3e"}
+```
+
+## 4.4.a
+
+```{r eval=FALSE, ref.label="4.4a"}
+```
+
+## 4.4.b
+
+```{r eval=FALSE, ref.label="4.4b"}
+```
+
+## 4.5.a
+
+```{r eval=FALSE, ref.label="4.5a"}
+```
+
+## 4.5.b
+
+```{r eval=FALSE, ref.label="4.5b"}
+```
+
+## 4.5.c
+
+```{r eval=FALSE, ref.label="4.5c"}
+```
