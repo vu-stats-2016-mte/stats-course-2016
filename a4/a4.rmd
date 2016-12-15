@@ -1,5 +1,5 @@
 ---
-title: "Statistical Methods - Assignment 3"
+title: "Statistical Methods - Assignment 4"
 author: "Michel Mooiweer (1866761) Thomas Webbers (2560695) Eirik Kultorp (2544992)"
 date: "December 2016"
 output: pdf_document
@@ -61,39 +61,58 @@ investigate_linear_correlation(income,crimes,"income","crimes")
 
 ### c)
 
-    // todo figure how to interpret this output and the plots
-    // based on https://www.r-bloggers.com/simple-linear-regression-2/
+
 
 ```{r 4.3c, echo=F}
 lmres = lm(crimes ~ income)
 summary(lmres)
-library("lattice")
-xyplot(resid(lmres) ~ fitted(lmres),
-  xlab = "Fitted Values",
-  ylab = "Residuals",
-  main = "Residual Diagnostic Plot",
-  panel = function(x, y, ...)
-  {
-    panel.grid(h = -1, v = -1)
-    panel.abline(h = 0)
-    panel.xyplot(x, y, ...)
-  }
-)
-qqmath( ~ resid(lmres),
-  xlab = "Theoretical Quantiles",
-  ylab = "Residuals"
-)
+"Intercept ="
+lmres$coefficients[1]
+"Slope ="
+lmres$coefficients[2]
+plot(income,crimes,xlab="Income",ylab="Crimes")
+abline(lmres$coefficients, col='red')
+
+
 ```
 
 ### d)
+- $H_0 : \beta_1 = 0$, $H_a : \beta_1 \neq 0$
+- Significance level $\alpha = .05$
+- Test statistic: \[T_\beta = b_1/s_{b_1}\]\
+  has a t-distribution with df = n-2 = 16 under $H_0$
+- Observed value:
 
 ```{r 4.3d, echo=F}
+unname(lmres$coefficients[2]/0.05527)
 ```
+- Critical values: two-tailed test and $\alpha = 0.05$ so $-t_{16,0.025}$ and $ t_{16,0.025}$ i.e. -2.120 and 2.120
+
+- Since 5.181 > 2.120 we reject $H_0$
+
+- There is sufficient evidence to warrant a rejection of the claim that there is no linear relationship between income and crime
 
 ### e)
 
+Requirements for testing linearity:
+- Independence: (difficult to check)
+- Normal distribution of residuals
+- Fixed standard deviation
+
 ```{r 4.3e, echo=F}
+par(mfrow=c(1,2))
+qqnorm(lmres$res, main = "Normal Q-Q plot of residuals")
+plot(income, lmres$res, ylab="Residuals", main="Residual plot")
 ```
+\
+\
+
+(Visusally)
+The residual plot shows no obvious pattern\
+The Q-Q plot seems to approach normal distribution
+
+So the requirements are met
+
 
 ## 4.4
 
@@ -116,7 +135,7 @@ expected <- c(0.301,0.176,0.125,0.097,0.079,0.067,0.058,0.051,0.046)
 observed <-c(45,32,18,12,9,3,13,9,9)
 chisq.test(observed, p=expected)
 ```
-With a significance level of 0.05 we do not have sufficient evidence to reject the null hypothesis and say the digits do not follow Benford's law
+- With a significance level of 0.05 we do not have sufficient evidence to reject the null hypothesis and say the digits do not follow Benford's law
 
 ## 4.5
 
@@ -145,12 +164,12 @@ colnames(result) <-  c('won', 'lost', 'draw')
 rownames(result) <- c('Bob', 'Cecilia', 'David', 'Emma')
 chisq.test(result)
 ```
--Because the p value is not below our significance level we can not reject the null hypothesis. Andy might perform equally well against all opponents
+- Because the p value is not below our significance level we can not reject the null hypothesis. Andy might perform equally well against all opponents
 
 
 ### c)
 
-If they play 96 games he is expected to win:
+If they play 69 games he is expected to win:
 
 ```{r 4.5c, echo=F}
 round(chisq.test(result)$exp['Emma', 'won'],3)
