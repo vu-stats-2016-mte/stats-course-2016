@@ -86,7 +86,7 @@ abline(lmres$coefficients, col='red')
 ```{r 4.3d, echo=F}
 unname(lmres$coefficients[2]/0.05527)
 ```
-- Critical values: two-tailed test and $\alpha = 0.05$ so $-t_{16,0.025}$ and $ t_{16,0.025}$ i.e. -2.120 and 2.120
+- Critical values: two-tailed test and $\alpha = 0.05$ so $-t_{16,0.025}$ and $t_{16,0.025}$ i.e. -2.120 and 2.120
 
 - Since 5.181 > 2.120 we reject $H_0$
 
