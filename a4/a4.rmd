@@ -15,8 +15,18 @@ options(warn=-1)
 
 ## 4.1
 
-    // todo
+- $H_0 : \rho = 0$\
+  $H_a : \rho > 0$
+- $\alpha = 0.01$
+- Test Statistic: $r$
+- Critical value from table A-6 for n = 40 and $\alpha=0.01$:
+  $0.402$
+- Observed value: $0.876$
+- Because our observed value is > the critical value we reject the null hypthesis
+- There does seem to be a linear correlation between the before and after weights
+- The r value shows that there is a correlation between joining and weight loss, but it does not prove that this effect is caused by weight watchers
 
+   
 ## 4.2 
 
     // todo
