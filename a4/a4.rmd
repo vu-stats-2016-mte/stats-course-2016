@@ -98,14 +98,25 @@ qqmath( ~ resid(lmres),
 ## 4.4
 
 ### a)
-
+$E_9 = 0.046 * \text{total number of files} =$
 ```{r 4.4a, echo=F}
+sum(c(45,32,18,12,9,3,13,9,9))*0.046
 ```
 
 ### b)
+- $H_0 = \text{the observed leading digits follow Benford's law }$\
+  $H_a= \text{the digits do not follow Benford's law}$
+- Significance level: $\ \alpha = 5\%\ $
+- Test statistic: \[ X^2 = \sum_{i= 1}^k\frac{(o_{i}- E_{i})^2}{E_{i{}}}\]
+  which has a $X^2$ distribution with $k-1$ degrees of freedom under the null hypothesis
+- Observed value($\ X^2$) and P-value:
 
 ```{r 4.4b, echo=F}
+expected <- c(0.301,0.176,0.125,0.097,0.079,0.067,0.058,0.051,0.046)
+observed <-c(45,32,18,12,9,3,13,9,9)
+chisq.test(observed, p=expected)
 ```
+With a significance level of 0.05 we do not have sufficient evidence to reject the null hypothesis and say the digits do not follow Benford's law
 
 ## 4.5
 
