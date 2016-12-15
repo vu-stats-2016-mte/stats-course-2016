@@ -53,8 +53,7 @@ income=dat[,2]
 crimes=dat[,3]
 
 investigate_linear_correlation <- function(v1,v2,xlab,ylab){
-  print(v1)
-  print(v2)
+  
   plot(v1,v2,xlab=xlab,ylab=ylab)
   corr=cor(v1,v2)
   print(paste("Correlation: (",xlab,",",ylab,")",corr))
@@ -80,22 +79,17 @@ investigate_linear_correlation(income,crimes,"income","crimes")
 
 ### c)
 
-
-
 ```{r 4.3c, echo=F}
 lmres = lm(crimes ~ income)
 summary(lmres)
-"Intercept ="
-lmres$coefficients[1]
-"Slope ="
-lmres$coefficients[2]
+print(paste("Intercept =",lmres$coefficients[1]))
+print(paste("Slope =",lmres$coefficients[2]))
 plot(income,crimes,xlab="Income",ylab="Crimes")
 abline(lmres$coefficients, col='red')
-
-
 ```
 
 ### d)
+
 - $H_0 : \beta_1 = 0$, $H_a : \beta_1 \neq 0$
 - Significance level $\alpha = .05$
 - Test statistic: \[T_\beta = b_1/s_{b_1}\]\
@@ -105,6 +99,7 @@ abline(lmres$coefficients, col='red')
 ```{r 4.3d, echo=F}
 unname(lmres$coefficients[2]/0.05527)
 ```
+
 - Critical values: two-tailed test and $\alpha = 0.05$ so $-t_{16,0.025}$ and $t_{16,0.025}$ i.e. -2.120 and 2.120
 
 - Since 5.181 > 2.120 we reject $H_0$
@@ -130,13 +125,14 @@ plot(income, lmres$res, ylab="Residuals", main="Residual plot")
 The residual plot shows no obvious pattern\
 The Q-Q plot seems to approach normal distribution
 
-So the requirements are met
-
+So the requirements are met.
 
 ## 4.4
 
 ### a)
+
 $E_9 = 0.046 * \text{total number of files} =$
+
 ```{r 4.4a, echo=F}
 sum(c(45,32,18,12,9,3,13,9,9))*0.046
 ```
