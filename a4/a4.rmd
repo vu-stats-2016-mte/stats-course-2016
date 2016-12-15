@@ -111,18 +111,38 @@ qqmath( ~ resid(lmres),
 
 ### a)
 
+Because we are interested in if each 'subgroup' (which contain the result against one person) follow the same distribution of win, loss, draw we do a test of homeogenity.
+
+- $\ H_0 = \text{andy performs equally well against all opponents}$\
+- $\ H_a =\text{andy does not perform equally well against all opponents}$\
 ```{r 4.5a, echo=F}
+
 ```
+
 
 ### b)
 
+- For hypotheses see 4.5a)
+- Significance level: $\ \alpha = 5\%\ $
+- Test statistic: \[ X^2 = \sum_{i,j}\frac{(o_{ij}- E_{ij})^2}{E_{ij{}}}\]
+  which has a $X^2$ distribution with $(rows-1)(columns-1)$ degrees of freedom under the null hypothesis
+- Observed value($\ X^2$) and P-value:
+
 ```{r 4.5b, echo=F}
+result <- matrix(c(179,96,52,39,47,17,13,15,57,36,18,15), ncol = 3)
+colnames(result) <-  c('won', 'lost', 'draw')
+rownames(result) <- c('Bob', 'Cecilia', 'David', 'Emma')
+chisq.test(result)
 ```
+-Because the p value is not below our significance level we can not reject the null hypothesis. Andy might perform equally well against all opponents
 
 
 ### c)
 
+If they play 96 games he is expected to win:
+
 ```{r 4.5c, echo=F}
+round(chisq.test(result)$exp['Emma', 'won'],3)
 ```
 
 # Appendix
