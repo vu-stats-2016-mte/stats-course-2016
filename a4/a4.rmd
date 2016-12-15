@@ -29,7 +29,16 @@ options(warn=-1)
    
 ## 4.2 
 
-    // todo
+- $H_0 :$ The frequencies of tire guesses are uniformly distributed \
+  $H_a :$ The Frequencies of tire guesses are not uniformly distributed
+- $\alpha =0.05$
+- Test statistic: \[ X^2 = \sum_{i= 1}^k\frac{(o_{i}- E_{i})^2}{E_{i{}}}\]
+  which has a $X^2$ distribution with $k-1 = 3$ degrees of freedom under the null hypothesis
+  
+- Observed value: $X^2$ = 4.6
+- Critical value is 7.815 (Triola A-4)
+- Becuase 4.6 < 7.815 we can not reject the null hypotheses that the frequencies are uniformly distributed
+- This means that if all 4 students guess they have a 1*.25^3 =0.016 chane to all guess the same tire.
 
 # R-Exercises
 
